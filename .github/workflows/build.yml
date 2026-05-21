@@ -1,0 +1,41 @@
+name: Build items database
+
+on:
+  schedule:
+    - cron: '0 13 * * 3'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install deps
+        run: bun install
+
+      - name: Run parser
+        run: bun run src/index.ts --no-loop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build items.json
+        run: bun run src/build-items-db.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit
+        run: |
+          git config user.name "stalbot"
+          git config user.email "bot@stalticket.app"
+          git add items.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto update [skip ci]"
+            git push
+          else
+            echo "No changes"
+          fi

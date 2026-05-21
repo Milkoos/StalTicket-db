@@ -1,0 +1,201 @@
+import fs from "node:fs";
+import fsPromises from "node:fs/promises";
+import path from "node:path";
+import axios from "axios";
+import { PROXY_CONFIG } from "./constants";
+import type {
+	AddStatBlock,
+	MessageTranslation,
+	NumericRangeElement,
+} from "./type";
+
+const API_URL = "https://sctools.tech/api/exbo/items/?category=artefact";
+
+interface ApiStat {
+	isPositive?: boolean;
+	name?: Record<string, string>;
+	key?: string;
+	minValue?: number;
+	maxValue?: number;
+	formattedValue?: Record<string, string>;
+}
+
+interface ApiItem {
+	id: string;
+	custom_id?: string;
+	key?: string;
+	add_info?: {
+		addStats?: ApiStat[];
+	};
+}
+
+export async function additionalStatsParse(
+	outDir: string,
+	proxy: boolean = false,
+) {
+	console.log("[AddStats] Fetching artefacts from API…");
+
+	let apiItems: ApiItem[];
+
+	try {
+		const res = await axios.get<ApiItem[]>(API_URL, {
+			headers: {
+				accept: "application/json",
+				"User-Agent":
+					"Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0",
+			},
+			proxy: proxy ? PROXY_CONFIG : false,
+			timeout: 10000,
+		});
+		apiItems = res.data;
+		console.log(
+			`[AddStats] API items received directly: ${
+				Array.isArray(apiItems) ? apiItems.length : typeof apiItems
+			}`,
+		);
+	} catch (err: unknown) {
+		console.error(
+			"[AddStats] API fetch failed:",
+			err instanceof Error ? err.message : err,
+		);
+		return;
+	}
+
+	const artefactsDir = path.join(outDir, "items", "artefact");
+	if (!fs.existsSync(artefactsDir)) {
+		console.warn(`[AddStats] Directory not found: ${artefactsDir}`);
+		return;
+	}
+
+	const jsonFiles: string[] = [];
+	async function walk(dir: string) {
+		const entries = await fsPromises.readdir(dir, { withFileTypes: true });
+		for (const entry of entries) {
+			const full = path.join(dir, entry.name);
+			if (entry.isDirectory()) await walk(full);
+			else if (entry.isFile() && full.endsWith(".json")) jsonFiles.push(full);
+		}
+	}
+	await walk(artefactsDir);
+	console.log(`[AddStats] JSON files found: ${jsonFiles.length}`);
+	if (!jsonFiles.length) return;
+
+	const index = new Map<string, string[]>();
+	for (const file of jsonFiles) {
+		try {
+			const json = JSON.parse(await fsPromises.readFile(file, "utf8"));
+			const keys = [
+				json?.id,
+				json?.custom_id,
+				json?.key,
+				path.basename(file, ".json"),
+			].filter(Boolean);
+			for (const key of keys) {
+				const k = String(key);
+				if (!index.has(k)) index.set(k, []);
+				index.get(k)?.push(file);
+			}
+		} catch (e: unknown) {
+			console.warn(
+				`[AddStats] Broken json: ${file} — ${e instanceof Error ? e.message : e}`,
+			);
+		}
+	}
+
+	console.log(`[AddStats] Index keys generated: ${index.size}`);
+
+	let matched = 0;
+	let modified = 0;
+
+	for (const item of apiItems) {
+		const lookupKeys = [item.id, item.custom_id, item.key].filter(Boolean);
+		const files = new Set<string>();
+		for (const key of lookupKeys) {
+			const found = index.get(String(key));
+			if (found)
+				found.forEach((f): void => {
+					files.add(f);
+				});
+		}
+
+		if (!files.size) {
+			console.log(`[AddStats] ❌ No match for item: ${item.id}`);
+			continue;
+		}
+
+		const stats = item?.add_info?.addStats;
+		if (!Array.isArray(stats) || !stats.length) {
+			console.log(`[AddStats] ⚠ No addStats for item: ${item.id}`);
+			continue;
+		}
+
+		matched++;
+
+		const elements: NumericRangeElement[] = stats.map((stat: ApiStat) => {
+			const { isPositive, name, key, minValue, maxValue, formattedValue } =
+				stat ?? {};
+			const mergedLines = typeof name === "object" && name ? { ...name } : {};
+
+			const nameObj: MessageTranslation = {
+				type: "translation",
+				key: key || "",
+				args: {},
+				lines: mergedLines,
+			};
+
+			const formatted: {
+				value?: Record<string, string>;
+				nameColor?: string;
+				valueColor?: string;
+			} = {};
+			if (formattedValue && typeof formattedValue === "object")
+				formatted.value = formattedValue;
+			if (isPositive === true) {
+				formatted.nameColor = "53C353";
+				formatted.valueColor = "53C353";
+			} else if (isPositive === false) {
+				formatted.nameColor = "FF4D4D";
+				formatted.valueColor = "FF4D4D";
+			}
+
+			const element: NumericRangeElement = {
+				type: "range",
+				name: nameObj,
+				min: minValue ?? 0,
+				max: maxValue ?? 0,
+			};
+			if (Object.keys(formatted).length) element.formatted = formatted;
+			return element;
+		});
+
+		const listBlock: AddStatBlock = {
+			type: "addStat",
+			title: { type: "text", text: "" },
+			elements,
+		};
+
+		for (const file of files) {
+			try {
+				const raw = await fsPromises.readFile(file, "utf8");
+				const json = JSON.parse(raw);
+				const infoBlocksKey = json.info_blocks
+					? "info_blocks"
+					: json.infoBlocks
+						? "infoBlocks"
+						: "info_blocks";
+				if (!json[infoBlocksKey]) json[infoBlocksKey] = [];
+				json[infoBlocksKey].push(listBlock);
+				await fsPromises.writeFile(file, JSON.stringify(json, null, 2), "utf8");
+				modified++;
+			} catch (e: unknown) {
+				console.warn(
+					`[AddStats] Failed to update file ${file}: ${e instanceof Error ? e.message : e}`,
+				);
+			}
+		}
+	}
+
+	console.log(
+		`[AddStats] Done. Matched: ${matched}, Files updated: ${modified}`,
+	);
+}
