@@ -1,16 +1,38 @@
-import { readdirSync, readFileSync, writeFileSync, statSync, existsSync, rmSync } from "fs";
+import {
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  statSync,
+  existsSync,
+  rmSync,
+} from "fs";
 import { join, extname, basename, resolve } from "path";
 
 const CANDIDATES = ["merged/items"];
-const DATA_DIR = resolve(CANDIDATES.find((p) => existsSync(p)) || "merged/items");
-const OUT_FILE = resolve("items.json");
+const DATA_DIR = resolve(
+  CANDIDATES.find((p) => existsSync(p)) || "merged/items",
+);
+const OUT_FILE = resolve("data/items.json");
 
 const SKIP_CLEANUP = process.argv.includes("--no-cleanup");
 
 const TARGET_CATEGORIES: Record<string, string[]> = {
-  weapon: ["assault_rifle", "sniper_rifle", "shotgun_rifle", "submachine_gun", "machine_gun", "heavy"],
+  weapon: [
+    "assault_rifle",
+    "sniper_rifle",
+    "shotgun_rifle",
+    "submachine_gun",
+    "machine_gun",
+    "heavy",
+  ],
   armor: ["clothes", "combat", "combined", "scientist"],
-  artefact: ["biochemical", "electrophysical", "gravity", "thermal", "other_arts"],
+  artefact: [
+    "biochemical",
+    "electrophysical",
+    "gravity",
+    "thermal",
+    "other_arts",
+  ],
 };
 
 const FLAT_DIRS: Record<string, { type: string; cat: string }> = {
@@ -60,19 +82,35 @@ interface ItemData {
 function parseRangeElement(elem: any): ItemProperty | null {
   const key = extractFactorKey(elem.name?.key || "");
   if (typeof elem.min !== "number" || typeof elem.max !== "number") return null;
-  return { key, min: elem.min, max: elem.max, valueColor: elem.formatted?.valueColor, name_ru: elem.name?.lines?.ru };
+  return {
+    key,
+    min: elem.min,
+    max: elem.max,
+    valueColor: elem.formatted?.valueColor,
+    name_ru: elem.name?.lines?.ru,
+  };
 }
 
 function parseNumericElement(elem: any): ItemProperty | null {
   const key = extractFactorKey(elem.name?.key || "");
   if (typeof elem.value !== "number") return null;
-  return { key, value: elem.value, valueColor: elem.formatted?.valueColor, name_ru: elem.name?.lines?.ru };
+  return {
+    key,
+    value: elem.value,
+    valueColor: elem.formatted?.valueColor,
+    name_ru: elem.name?.lines?.ru,
+  };
 }
 
 function parseNumericVariantsElement(elem: any): ItemProperty | null {
   const key = extractFactorKey(elem.name?.key || "");
   if (!Array.isArray(elem.value)) return null;
-  return { key, values: elem.value, valueColor: elem.valueColor, name_ru: elem.name?.lines?.ru };
+  return {
+    key,
+    values: elem.value,
+    valueColor: elem.valueColor,
+    name_ru: elem.name?.lines?.ru,
+  };
 }
 
 function parseItemProperties(infoBlocks: any[]): ItemProperties | undefined {
@@ -86,25 +124,49 @@ function parseItemProperties(infoBlocks: any[]): ItemProperties | undefined {
     if (!Array.isArray(block.elements)) continue;
     if (block.type === "addStat") {
       for (const elem of block.elements) {
-        if (elem.type === "range") { const p = parseRangeElement(elem); if (p) additional.push(p); }
+        if (elem.type === "range") {
+          const p = parseRangeElement(elem);
+          if (p) additional.push(p);
+        }
       }
       continue;
     }
     if (block.type === "list") {
       for (const elem of block.elements) {
-        if (elem.type === "range") { const p = parseRangeElement(elem); if (p) main.push(p); }
+        if (elem.type === "range") {
+          const p = parseRangeElement(elem);
+          if (p) main.push(p);
+        }
         if (elem.type === "numeric") {
           const keyRaw = elem.name?.key || "";
-          if (keyRaw.includes("backpack.info.size") || keyRaw.includes("capacity")) {
+          if (
+            keyRaw.includes("backpack.info.size") ||
+            keyRaw.includes("capacity")
+          ) {
             if (typeof elem.value === "number") slots = elem.value;
-            else if (elem.formatted?.value) { const m = elem.formatted.value.ru?.match(/\/(\d+)/); if (m) slots = parseInt(m[1], 10); }
+            else if (elem.formatted?.value) {
+              const m = elem.formatted.value.ru?.match(/\/(\d+)/);
+              if (m) slots = parseInt(m[1], 10);
+            }
             continue;
           }
-          if (keyRaw.includes("backpack.stat_name.effectiveness")) { if (typeof elem.value === "number") effectiveness = elem.value; continue; }
-          if (keyRaw.includes("backpack.stat_name.inner_protection")) { if (typeof elem.value === "number") inner_protection = elem.value; continue; }
-          if (FACTOR_PREFIXES.some((p) => keyRaw.startsWith(p))) { const p = parseNumericElement(elem); if (p) main.push(p); }
+          if (keyRaw.includes("backpack.stat_name.effectiveness")) {
+            if (typeof elem.value === "number") effectiveness = elem.value;
+            continue;
+          }
+          if (keyRaw.includes("backpack.stat_name.inner_protection")) {
+            if (typeof elem.value === "number") inner_protection = elem.value;
+            continue;
+          }
+          if (FACTOR_PREFIXES.some((p) => keyRaw.startsWith(p))) {
+            const p = parseNumericElement(elem);
+            if (p) main.push(p);
+          }
         }
-        if (elem.type === "numericVariants") { const p = parseNumericVariantsElement(elem); if (p) main.push(p); }
+        if (elem.type === "numericVariants") {
+          const p = parseNumericVariantsElement(elem);
+          if (p) main.push(p);
+        }
       }
     }
   }
@@ -114,7 +176,8 @@ function parseItemProperties(infoBlocks: any[]): ItemProperties | undefined {
   if (additional.length) result.additional = additional;
   if (slots !== undefined) result.slots = slots;
   if (effectiveness !== undefined) result.effectiveness = effectiveness;
-  if (inner_protection !== undefined) result.inner_protection = inner_protection;
+  if (inner_protection !== undefined)
+    result.inner_protection = inner_protection;
   return Object.keys(result).length > 0 ? result : undefined;
 }
 
@@ -133,7 +196,11 @@ function isAllowedType(parts: string[]): { type: string; cat: string } | null {
 
 function walkDir(dir: string, acc: ItemData[]): void {
   let entries: string[];
-  try { entries = readdirSync(dir); } catch { return; }
+  try {
+    entries = readdirSync(dir);
+  } catch {
+    return;
+  }
   for (const entry of entries) {
     const full = join(dir, entry);
     const stat = statSync(full);
