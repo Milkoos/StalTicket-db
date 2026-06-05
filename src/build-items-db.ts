@@ -233,6 +233,7 @@ function walkDir(dir: string, acc: ItemData[]): void {
 
 const items: ItemData[] = [];
 walkDir(DATA_DIR, items);
+items.sort((a, b) => a.id.localeCompare(b.id));
 writeFileSync(OUT_FILE, JSON.stringify(items), "utf8");
 console.log(`Written ${items.length} items to ${OUT_FILE}`);
 
