@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "stalbot"
           git config user.email "bot@stalticket.app"
-          git add items.json
+          git add data/items.json
           if ! git diff --staged --quiet; then
             git commit -m "Auto update [skip ci]"
             git push
