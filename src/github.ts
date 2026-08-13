@@ -65,12 +65,20 @@ export async function extractItemsFromZip(zipPath: string, targetDir: string) {
 
 	const itemsPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/items/`;
 	const listingPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/listing.json`;
+	const achievementsPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/achievements.json`;
 
 	for (const entry of entries) {
 		const name = entry.entryName;
 
 		if (name === listingPrefix) {
 			const outPath = path.join(targetDir, "listing.json");
+			fs.mkdirSync(path.dirname(outPath), { recursive: true });
+			fs.writeFileSync(outPath, entry.getData());
+			continue;
+		}
+
+		if (name === achievementsPrefix) {
+			const outPath = path.join(targetDir, "achievements.json");
 			fs.mkdirSync(path.dirname(outPath), { recursive: true });
 			fs.writeFileSync(outPath, entry.getData());
 			continue;
