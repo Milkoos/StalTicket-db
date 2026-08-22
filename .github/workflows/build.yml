@@ -24,14 +24,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build items.json
-        run: bun run src/build-items-db.ts
+        run: bun run build:items
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build achievements.json
-        run: bun run src/build-achievements-db.ts
+        run: bun run build:achievements
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup artifacts
+        run: bun run clean
 
       - name: Commit
         run: |

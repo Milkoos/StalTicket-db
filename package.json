@@ -1,17 +1,22 @@
 {
     "name": "sc-db",
-    "module": "index.ts",
     "type": "module",
     "private": true,
+    "scripts": {
+        "start": "bun src/index.ts",
+        "build:items": "bun src/build-items-db.ts",
+        "build:achievements": "bun src/build-achievements-db.ts",
+        "clean": "bun src/cleanup.ts",
+        "typecheck": "tsc --noEmit"
+    },
     "devDependencies": {
+        "@types/adm-zip": "^0.5.7",
         "@types/bun": "latest"
     },
     "peerDependencies": {
         "typescript": "^5"
     },
     "dependencies": {
-        "@types/adm-zip": "^0.5.7",
-        "adm-zip": "^0.5.16",
-        "axios": "^1.13.2"
+        "adm-zip": "^0.5.16"
     }
 }

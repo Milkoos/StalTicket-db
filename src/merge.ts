@@ -1,240 +1,121 @@
-import fs from "node:fs";
 import path from "node:path";
-import type { InfoElement, Item } from "./type";
-import { readJSONSync, scanFolder, writeJSONSync } from "./utils/fsUtils";
-
-export function ensureNumberArray(v: unknown): number[] {
-	if (Array.isArray(v))
-		return v.filter((x): x is number => typeof x === "number");
+import type { InfoElement, Item, NumericElement, NumericVariantsElement } from "./type";
+import { ARMOR_BULLET_FACTOR_KEY, UPGRADE_STATS_TITLE_KEY, WEAPON_DAMAGE_KEY } from "./constants";
+import { errorMessage, readJSONSync, scanJsonFiles, writeJSONSync } from "./utils/fsUtils";
+interface Colors {
+	nameColor?: string;
+	valueColor?: string;
+}
+function isNumericLike(el: InfoElement): el is NumericElement | NumericVariantsElement {
+	return el.type === "numeric" || el.type === "numericVariants";
+}
+function ensureNumberArray(v: number | number[] | undefined): number[] {
+	if (Array.isArray(v)) return v.filter((x) => typeof x === "number");
 	if (typeof v === "number") return [v];
 	return [];
 }
-
-export function uniqSorted(nums: number[]) {
-	const s = Array.from(new Set(nums));
-	s.sort((a, b) => a - b);
-	return s;
+function uniqSorted(nums: number[]): number[] {
+	return [...new Set(nums)].sort((a, b) => a - b);
 }
-
-export function findNumericElementsByKey(item: Item, key: string) {
-	const results: { el: InfoElement; blockIdx: number; elIdx: number }[] = [];
-	if (!item.infoBlocks) return results;
-	item.infoBlocks.forEach((block, bi) => {
-		if (!("elements" in block) || !block.elements) return;
-		block.elements.forEach((el, ei) => {
-			if (el?.type === "numeric" || el?.type === "numericVariants") {
-				if (el.name?.type === "translation" && el.name.key === key) {
-					results.push({ el, blockIdx: bi, elIdx: ei });
-				}
-			}
-		});
-	});
-	return results;
+function takeColors(el: InfoElement, into: Colors): void {
+	if (!into.nameColor && el.formatted?.nameColor) into.nameColor = el.formatted.nameColor;
+	if (!into.valueColor && el.formatted?.valueColor) into.valueColor = el.formatted.valueColor;
+	if (!into.nameColor && el.nameColor) into.nameColor = el.nameColor;
+	if (!into.valueColor && el.valueColor) into.valueColor = el.valueColor;
 }
-
-export function collectFromVariant(variant: Item, matchKey: string) {
-	const numToLocStr: Map<number, Record<string, string>> = new Map();
-	let nameColor: string | undefined;
-	let valueColor: string | undefined;
-	if (!variant.infoBlocks) return { numToLocStr, nameColor, valueColor };
-
-	for (const block of variant.infoBlocks) {
-		if (!("title" in block) || !("elements" in block)) continue;
-		const isUpgradeStatsBlock =
-			block.title?.type === "translation" &&
-			block.title.key === "stalker.tooltip.armor_artefact.info.upgrade_stats";
-
-		if (!block.elements) continue;
+function translationKey(el: InfoElement | undefined): string | null {
+	if (!el || !("name" in el)) return null;
+	const name = el.name;
+	return name?.type === "translation" ? name.key : null;
+}
+function collectFromVariant(
+	variant: Item,
+	matchKey: string,
+): {
+	nums: number[];
+	colors: Colors;
+} {
+	const nums: number[] = [];
+	const colors: Colors = {};
+	for (const block of variant.infoBlocks ?? []) {
+		if (block.type !== "list" && block.type !== "addStat") continue;
+		const skipUpgradeStats =
+			matchKey === ARMOR_BULLET_FACTOR_KEY && block.title.type === "translation" && block.title.key === UPGRADE_STATS_TITLE_KEY;
 		for (const el of block.elements) {
-			if (
-				(el.type === "numeric" || el.type === "numericVariants") &&
-				el.name?.type === "translation" &&
-				el.name.key === matchKey
-			) {
-				if (
-					matchKey === "stalker.artefact_properties.factor.bullet_dmg_factor" &&
-					isUpgradeStatsBlock
-				)
-					continue;
-
-				const vals = ensureNumberArray((el as { value?: unknown }).value);
-				const fv = el.formatted?.value;
-
-				vals.forEach((num) => {
-					let rec = numToLocStr.get(num);
-					if (!rec) {
-						rec = {};
-						numToLocStr.set(num, rec);
-					}
-					if (fv && typeof fv === "object") {
-						for (const [loc, s] of Object.entries(fv)) {
-							if (typeof s === "string" && !rec?.[loc]) rec![loc] = s;
-						}
-					}
-				});
-
-				if (!nameColor && el.formatted?.nameColor)
-					nameColor = el.formatted.nameColor;
-				if (!valueColor && el.formatted?.valueColor)
-					valueColor = el.formatted.valueColor;
-
-				if (!nameColor && el.nameColor) nameColor = el.nameColor;
-				if (!valueColor && el.valueColor) valueColor = el.valueColor;
-			}
+			if (!isNumericLike(el) || translationKey(el) !== matchKey) continue;
+			if (skipUpgradeStats) continue;
+			nums.push(...ensureNumberArray(el.value));
+			takeColors(el, colors);
 		}
 	}
-	return { numToLocStr, nameColor, valueColor };
+	return { nums, colors };
 }
-
-export function mergeOneItem(orig: Item, variants: Item[]) {
-	const category = orig.category || "";
-	let matchKey: string | null = null;
-	if (category.startsWith("weapon"))
-		matchKey = "core.tooltip.stat_name.damage_type.direct";
-	else if (category.startsWith("armor"))
-		matchKey = "stalker.artefact_properties.factor.bullet_dmg_factor";
+export function mergeOneItem(orig: Item, variants: Item[]): Item {
+	const category = orig.category ?? "";
+	const matchKey = category.startsWith("weapon") ? WEAPON_DAMAGE_KEY : category.startsWith("armor") ? ARMOR_BULLET_FACTOR_KEY : null;
 	if (!matchKey) return orig;
-
-	const targets = findNumericElementsByKey(orig, matchKey);
-	if (!targets.length) return orig;
-
-	const allNums: number[] = [];
-	const numToLocaleStrings: Record<number, Record<string, string>> = {};
-	let chosenNameColor: string | undefined;
-	let chosenValueColor: string | undefined;
-
-	for (const t of targets) {
-		const el = t.el as { value?: unknown };
-		const origVals = ensureNumberArray(el.value);
-		origVals.forEach((n) => {
-			allNums.push(n);
-		});
-
-		if (t.el.formatted?.value && typeof t.el.formatted.value === "object") {
-			for (const n of origVals) {
-				if (!numToLocaleStrings[n]) numToLocaleStrings[n] = {};
-				for (const [loc, s] of Object.entries(t.el.formatted.value)) {
-					if (typeof s === "string") numToLocaleStrings[n][loc] = s;
+	const targets = (orig.infoBlocks ?? [])
+		.filter(
+			(
+				b,
+			): b is Extract<
+				typeof b,
+				{
+					elements: InfoElement[];
 				}
-			}
-		}
-
-		if (!chosenNameColor && t.el.formatted?.nameColor)
-			chosenNameColor = t.el.formatted.nameColor;
-		if (!chosenValueColor && t.el.formatted?.valueColor)
-			chosenValueColor = t.el.formatted.valueColor;
-		if (!chosenNameColor && t.el.nameColor) chosenNameColor = t.el.nameColor;
-		if (!chosenValueColor && t.el.valueColor)
-			chosenValueColor = t.el.valueColor;
+			> => b.type === "list" || b.type === "addStat",
+		)
+		.flatMap((b) => b.elements)
+		.filter((el): el is NumericElement | NumericVariantsElement => isNumericLike(el) && translationKey(el) === matchKey);
+	if (!targets.length) return orig;
+	const allNums: number[] = [];
+	const colors: Colors = {};
+	for (const el of targets) {
+		allNums.push(...ensureNumberArray(el.value));
+		takeColors(el, colors);
 	}
-
-	for (const v of variants) {
-		const { numToLocStr, nameColor, valueColor } = collectFromVariant(
-			v,
-			matchKey,
-		);
-		if (nameColor && !chosenNameColor) chosenNameColor = nameColor;
-		if (valueColor && !chosenValueColor) chosenValueColor = valueColor;
-
-		numToLocStr.forEach((locMap, num) => {
-			allNums.push(num);
-			if (!numToLocaleStrings[num]) numToLocaleStrings[num] = {};
-			for (const [loc, s] of Object.entries(locMap)) {
-				if (!numToLocaleStrings[num][loc]) numToLocaleStrings[num][loc] = s;
-			}
-		});
+	for (const variant of variants) {
+		const { nums, colors: variantColors } = collectFromVariant(variant, matchKey);
+		allNums.push(...nums);
+		colors.nameColor ??= variantColors.nameColor;
+		colors.valueColor ??= variantColors.valueColor;
 	}
-
 	const merged = uniqSorted(allNums);
-
-	for (const t of targets) {
-		const el = t.el as {
-			type: string;
-			value?: number | number[];
-			nameColor?: string;
-			valueColor?: string;
-			formatted?: Record<string, unknown>;
-		};
-		el.type = "numericVariants";
-		el.value = merged;
-		if (!el.nameColor && chosenNameColor) el.nameColor = chosenNameColor;
-		if (!el.valueColor && chosenValueColor) el.valueColor = chosenValueColor;
-		if (el.formatted) {
-			delete el.formatted.value;
-			delete el.formatted.nameColor;
-			delete el.formatted.valueColor;
-			if (!Object.keys(el.formatted).length) delete el.formatted;
+	for (const target of targets) {
+		target.type = "numericVariants";
+		target.value = merged;
+		target.nameColor ??= colors.nameColor;
+		target.valueColor ??= colors.valueColor;
+		if (target.formatted) {
+			delete target.formatted.value;
+			delete target.formatted.nameColor;
+			delete target.formatted.valueColor;
+			if (!Object.keys(target.formatted).length) delete target.formatted;
 		}
 	}
-
 	return orig;
 }
-
-export function runMerge(ORIG_DIR: string, OUT_DIR: string) {
-	const allFiles = scanFolder(ORIG_DIR);
+export async function runMerge(origDir: string, outDir: string): Promise<void> {
+	const allFiles = scanJsonFiles(origDir);
 	console.log("[Merge] Found JSON files:", allFiles.length);
-
-	const resolvedOutBase = path.resolve(OUT_DIR);
-
-	for (const f of allFiles) {
-		if (f.includes(`${path.sep}_variants${path.sep}`)) continue;
-
+	for (const file of allFiles) {
+		if (file.includes(`${path.sep}_variants${path.sep}`)) continue;
 		try {
-			const rel = path.relative(ORIG_DIR, f);
-			const safeRel = rel.replace(/^([\\/])+/, "");
-			const outPath = path.join(OUT_DIR, safeRel);
-			const resolvedOut = path.resolve(outPath);
-
-			if (
-				!(
-					resolvedOut === resolvedOutBase ||
-					resolvedOut.startsWith(resolvedOutBase + path.sep)
-				)
-			) {
-				throw new Error(
-					`[merge] Unsafe outPath resolved (outside OUT_DIR). src=${f} rel=${rel} outPath=${outPath} resolvedOut=${resolvedOut} OUT_DIR=${resolvedOutBase}`,
-				);
-			}
-
-			const orig = readJSONSync(f) as Item;
-
-			const dir = path.dirname(f);
-			const base = path.basename(f, ".json");
-			const variantsFolder = path.join(dir, "_variants", base);
-
+			const orig = readJSONSync<Item>(file);
+			const base = path.basename(file, ".json");
+			const variantsFolder = path.join(path.dirname(file), "_variants", base);
 			const variants: Item[] = [];
-			if (fs.existsSync(variantsFolder)) {
-				const varFiles = scanFolder(variantsFolder);
-				for (const vf of varFiles) {
-					try {
-						variants.push(readJSONSync(vf) as Item);
-					} catch (err) {
-						console.warn(
-							`[merge] Failed to read variant ${vf}:`,
-							(err as Error).message,
-						);
-					}
+			for (const vf of scanJsonFiles(variantsFolder)) {
+				try {
+					variants.push(readJSONSync<Item>(vf));
+				} catch (e) {
+					console.warn(`[Merge] Failed to read variant ${vf}:`, errorMessage(e));
 				}
 			}
-
-			const merged = mergeOneItem(orig, variants);
-
-			const outBaseName = path.basename(resolvedOut);
-			if (!outBaseName) {
-				throw new Error(
-					`[merge] Computed out path has no basename: ${resolvedOut}`,
-				);
-			}
-
-			writeJSONSync(resolvedOut, merged);
-		} catch (e: unknown) {
-			console.error(
-				"[Merge] Error processing file",
-				f,
-				e instanceof Error ? e.message : e,
-			);
+			writeJSONSync(path.join(outDir, path.relative(origDir, file)), mergeOneItem(orig, variants));
+		} catch (e) {
+			console.error("[Merge] Error processing file", file, errorMessage(e));
 		}
 	}
-
 	console.log("[Merge] Done.");
 }

@@ -1,4 +1,4 @@
-FROM oven/bun:latest
+FROM oven/bun:1
 
 WORKDIR /app
 
@@ -9,5 +9,4 @@ COPY src ./src
 
 RUN mkdir -p /app/items /app/merged
 
-WORKDIR /app/src
-CMD ["bun", "run", "index.ts"]
+CMD ["bun", "run", "src/index.ts"]

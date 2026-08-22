@@ -1,153 +1,85 @@
 import fs from "node:fs";
 import path from "node:path";
 import AdmZip from "adm-zip";
-import axios from "axios";
 import {
+	ALLOWED_ITEM_CATEGORIES,
+	FETCH_TIMEOUT_MS,
 	GITHUB_BRANCH,
-	GITHUB_OWNER,
 	GITHUB_REPO,
-	PROXY_CONFIG,
+	NOTIFY_TIMEOUT_MS,
+	SYNC_WEBHOOK_URL,
+	githubCommitApiUrl,
 } from "./constants";
-
-export async function downloadZip(url: string, dest: string, proxy = false) {
-	let totalSize = 0;
-
-	try {
-		const headRes = await axios.head(url, {
-			proxy: proxy ? PROXY_CONFIG : false,
-		});
-		totalSize = Number(headRes.headers["content-length"] || 0);
-	} catch {
-		console.log("Could not determine file size");
+export async function downloadZip(url: string, dest: string, proxy?: string): Promise<void> {
+	const response = await fetch(url, {
+		proxy,
+	} as RequestInit & {
+		proxy?: string;
+	});
+	if (!response.ok || !response.body) {
+		throw new Error(`Download failed: HTTP ${response.status}`);
 	}
-
-	const response = await axios.get(url, {
-		responseType: "stream",
-		proxy: proxy ? PROXY_CONFIG : false,
-	});
-
-	const fileStream = fs.createWriteStream(dest);
-	let downloaded = 0;
-
-	response.data.on("data", (chunk: Buffer) => {
-		downloaded += chunk.length;
-		if (totalSize) {
-			const perc = ((downloaded / totalSize) * 100).toFixed(1);
-			Bun.stdout.write(
-				`\rDownloading: ${perc}% [${(downloaded / 1024 / 1024).toFixed(
-					2,
-				)} / ${(totalSize / 1024 / 1024).toFixed(2)} MB]`,
-			);
-		} else {
-			Bun.stdout.write(
-				`\rDownloading: ${(downloaded / 1024 / 1024).toFixed(2)} MB...`,
-			);
-		}
-	});
-
-	await new Promise<void>((resolve, reject) => {
-		fileStream.on("finish", () => {
-			console.log("\n✓ Download completed");
-			resolve();
-		});
-		fileStream.on("error", reject);
-		response.data.pipe(fileStream);
-	});
+	await Bun.write(dest, response);
+	const sizeMb = (fs.statSync(dest).size / 1024 / 1024).toFixed(2);
+	console.log(`[GitHub] Download completed (${sizeMb} MB)`);
 }
-
-const ALLOWED_ITEM_CATEGORIES = new Set([
-	"weapon", "armor", "artefact", "backpacks", "containers",
-]);
-
-export async function extractItemsFromZip(zipPath: string, targetDir: string) {
+const STANDALONE = new Set<string>(["listing.json", "achievements.json"]);
+export function extractItemsFromZip(zipPath: string, targetDir: string): void {
 	const zip = new AdmZip(zipPath);
-	const entries = zip.getEntries();
-
-	const itemsPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/items/`;
-	const listingPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/listing.json`;
-	const achievementsPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/achievements.json`;
-
-	for (const entry of entries) {
-		const name = entry.entryName;
-
-		if (name === listingPrefix) {
-			const outPath = path.join(targetDir, "listing.json");
-			fs.mkdirSync(path.dirname(outPath), { recursive: true });
-			fs.writeFileSync(outPath, entry.getData());
-			continue;
+	const rootPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/`;
+	const itemsPrefix = `${rootPrefix}items/`;
+	for (const entry of zip.getEntries()) {
+		if (entry.isDirectory) continue;
+		const relToRoot = entry.entryName.startsWith(rootPrefix) ? entry.entryName.slice(rootPrefix.length) : "";
+		let outRel: string | undefined;
+		if (STANDALONE.has(relToRoot)) {
+			outRel = relToRoot;
+		} else if (entry.entryName.startsWith(itemsPrefix)) {
+			const itemRel = entry.entryName.slice(itemsPrefix.length);
+			const category = itemRel.split("/")[0];
+			if (itemRel && category && ALLOWED_ITEM_CATEGORIES.has(category)) {
+				outRel = `items/${itemRel}`;
+			}
 		}
-
-		if (name === achievementsPrefix) {
-			const outPath = path.join(targetDir, "achievements.json");
-			fs.mkdirSync(path.dirname(outPath), { recursive: true });
-			fs.writeFileSync(outPath, entry.getData());
-			continue;
-		}
-
-		if (!name.startsWith(itemsPrefix)) continue;
-
-		const relPath = name.slice(itemsPrefix.length);
-		if (!relPath) continue;
-
-		const topDir = relPath.split("/")[0];
-		if (!ALLOWED_ITEM_CATEGORIES.has(topDir)) continue;
-
-		const outPath = path.join(targetDir, "items", relPath);
-
-		if (entry.isDirectory) {
-			fs.mkdirSync(outPath, { recursive: true });
-		} else {
-			fs.mkdirSync(path.dirname(outPath), { recursive: true });
-			fs.writeFileSync(outPath, entry.getData());
-		}
+		if (!outRel) continue;
+		const outPath = path.join(targetDir, outRel);
+		fs.mkdirSync(path.dirname(outPath), { recursive: true });
+		fs.writeFileSync(outPath, entry.getData());
 	}
 }
-
-export async function notifySync() {
-	if (!process.env.SYNC_TOKEN) return;
-
+export async function notifySync(): Promise<void> {
+	const token = process.env.SYNC_TOKEN;
+	if (!token) return;
 	try {
-		await fetch("http://sync:7829/sync", {
+		const response = await fetch(SYNC_WEBHOOK_URL, {
 			method: "POST",
-			headers: {
-				"x-sync-token": process.env.SYNC_TOKEN,
-			},
+			headers: { "x-sync-token": token },
+			signal: AbortSignal.timeout(NOTIFY_TIMEOUT_MS),
 		});
-
+		if (!response.ok) throw new Error(`HTTP ${response.status}`);
 		console.log("[Sync] sync-server notified");
 	} catch (e) {
 		console.warn("[Sync] failed to notify sync-server:", e);
 	}
 }
-
 interface GitHubCommitResponse {
 	sha: string;
 }
-
 export async function getRemoteSha(): Promise<string | null> {
 	try {
-		const res = await axios.get<GitHubCommitResponse>(
-			`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits/${GITHUB_BRANCH}`,
-			{
-				headers: {
-					...(process.env.GITHUB_TOKEN && {
-						Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-					}),
-				},
-			},
-		);
-
-		return res.data.sha;
-	} catch (e: unknown) {
-		const err = e as {
-			response?: { status?: number; data?: unknown };
-			message?: string;
-		};
-		console.warn(
-			"[GitHub] Failed to fetch remote sha:",
-			err.response?.status,
-			err.response?.data || err.message,
-		);
+		const headers: Record<string, string> = { accept: "application/vnd.github+json" };
+		if (process.env.GITHUB_TOKEN) {
+			headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+		}
+		const response = await fetch(githubCommitApiUrl(), {
+			headers,
+			signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+		});
+		if (!response.ok) throw new Error(`HTTP ${response.status}`);
+		const data = (await response.json()) as Partial<GitHubCommitResponse>;
+		return data.sha ?? null;
+	} catch (e) {
+		console.warn("[GitHub] Failed to fetch remote sha:", e);
 		return null;
 	}
 }
