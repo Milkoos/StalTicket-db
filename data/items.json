@@ -4487,31 +4487,6 @@
     }
   },
   {
-    "id": "4q12o",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "«Хладорез»",
-    "rarity": "RANK_MASTER",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -1.9999981,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        },
-        {
-          "key": "core.tooltip.stat_name.damage_type.direct",
-          "values": [
-            13
-          ],
-          "valueColor": "EEEEEE",
-          "name_ru": "Урон"
-        }
-      ]
-    }
-  },
-  {
     "id": "4q17r",
     "type": "weapon",
     "category": "sniper_rifle",
@@ -10144,23 +10119,6 @@
     }
   },
   {
-    "id": "96w1y",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "РГМ-40 «Кастет»",
-    "rarity": "RANK_STALKER",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -1.9999981,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        }
-      ]
-    }
-  },
-  {
     "id": "96y6z",
     "type": "armor",
     "category": "combined",
@@ -12573,23 +12531,6 @@
           ],
           "valueColor": "EEEEEE",
           "name_ru": "Урон"
-        }
-      ]
-    }
-  },
-  {
-    "id": "g4vj5",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "РГ-6",
-    "rarity": "RANK_VETERAN",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -7.999998,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
         }
       ]
     }
@@ -16383,31 +16324,6 @@
           "value": 40,
           "valueColor": "EEEEEE",
           "name_ru": "Защита от кровотечения"
-        }
-      ]
-    }
-  },
-  {
-    "id": "knv1p",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "«Хладомет»",
-    "rarity": "RANK_MASTER",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -10.000002,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        },
-        {
-          "key": "core.tooltip.stat_name.damage_type.direct",
-          "values": [
-            13
-          ],
-          "valueColor": "EEEEEE",
-          "name_ru": "Урон"
         }
       ]
     }
@@ -25479,31 +25395,6 @@
     }
   },
   {
-    "id": "wj6m3",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "«Огниво»",
-    "rarity": "RANK_VETERAN",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -1.9999981,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        },
-        {
-          "key": "core.tooltip.stat_name.damage_type.direct",
-          "values": [
-            10
-          ],
-          "valueColor": "EEEEEE",
-          "name_ru": "Урон"
-        }
-      ]
-    }
-  },
-  {
     "id": "wj72d",
     "type": "weapon",
     "category": "sniper_rifle",
@@ -30271,48 +30162,6 @@
           "value": 45,
           "valueColor": "EEEEEE",
           "name_ru": "Защита от кровотечения"
-        }
-      ]
-    }
-  },
-  {
-    "id": "zzl6m",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "РПГ-7",
-    "rarity": "RANK_MASTER",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -7.999998,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        }
-      ]
-    }
-  },
-  {
-    "id": "zzlvm",
-    "type": "weapon",
-    "category": "heavy",
-    "name_ru": "Огнемет",
-    "rarity": "RANK_VETERAN",
-    "item_properties": {
-      "main": [
-        {
-          "key": "speed_modifier",
-          "value": -10.000002,
-          "valueColor": "C15252",
-          "name_ru": "Скорость передвижения"
-        },
-        {
-          "key": "core.tooltip.stat_name.damage_type.direct",
-          "values": [
-            10
-          ],
-          "valueColor": "EEEEEE",
-          "name_ru": "Урон"
         }
       ]
     }

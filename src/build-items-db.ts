@@ -38,7 +38,7 @@ export interface ItemData {
 	item_properties?: ItemProperties;
 }
 const TARGET_CATEGORIES: Record<string, readonly string[]> = {
-	weapon: ["assault_rifle", "sniper_rifle", "shotgun_rifle", "submachine_gun", "machine_gun", "heavy"],
+	weapon: ["assault_rifle", "sniper_rifle", "shotgun_rifle", "submachine_gun", "machine_gun"],
 	armor: ["clothes", "combat", "combined", "scientist"],
 	artefact: ["biochemical", "electrophysical", "gravity", "thermal", "other_arts"],
 };
