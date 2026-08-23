@@ -1,6 +1,7 @@
 import { basename, dirname, resolve } from "node:path";
 import { DATA_DIR, FACTOR_PREFIXES, OUT_DIR } from "./constants";
 import type { AddStatBlock, ElementListBlock, InfoElement, NumericRangeElement } from "./type";
+import { expandItemVariants } from "./itemVariants";
 import { errorMessage, readJSONSync, scanJsonFiles, writeJSONSync } from "./utils/fsUtils";
 const DATA_FILE = resolve(DATA_DIR, "items.json");
 interface RawItemFile {
@@ -181,7 +182,7 @@ function collectItems(dir: string, acc: ItemData[]): void {
 			};
 			const props = parseItemProperties(raw.infoBlocks ?? raw.info_blocks ?? []);
 			if (props) item.item_properties = props;
-			acc.push(item);
+			acc.push(...expandItemVariants(item));
 		} catch (e) {
 			console.warn(`[BuildItems] Skip ${file}: ${errorMessage(e)}`);
 		}
