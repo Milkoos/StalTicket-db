@@ -1,5 +1,5 @@
 import { basename, dirname, resolve } from "node:path";
-import { DATA_DIR, FACTOR_PREFIXES, OUT_DIR } from "./constants";
+import { COLOR_POLARITY, DATA_DIR, FACTOR_PREFIXES, OUT_DIR, type Polarity } from "./constants";
 import type { AddStatBlock, ElementListBlock, InfoElement, NumericRangeElement } from "./type";
 import { expandItemVariants } from "./itemVariants";
 import { errorMessage, readJSONSync, scanJsonFiles, writeJSONSync } from "./utils/fsUtils";
@@ -13,13 +13,14 @@ interface RawItemFile {
 	infoBlocks?: unknown[];
 	info_blocks?: unknown[];
 }
+
 export interface ItemProperty {
 	key: string;
 	min?: number;
 	max?: number;
 	value?: number;
 	values?: number[];
-	valueColor?: string;
+	polarity?: Polarity;
 	name_ru?: string;
 }
 export interface ItemProperties {
@@ -78,6 +79,10 @@ function extractFactorKey(fullKey: string): string {
 	}
 	return fullKey;
 }
+function toPolarity(color: unknown): Polarity | undefined {
+	if (typeof color !== "string") return undefined;
+	return COLOR_POLARITY[color.toUpperCase()];
+}
 function translationOf(el: InfoElement): {
 	key: string;
 	ru?: string;
@@ -91,7 +96,7 @@ function parseRangeElement(el: NumericRangeElement): ItemProperty | null {
 		key: extractFactorKey(key),
 		min: el.min,
 		max: el.max,
-		valueColor: el.formatted?.valueColor,
+		polarity: toPolarity(el.formatted?.valueColor),
 		name_ru: ru,
 	};
 }
@@ -104,11 +109,11 @@ function parseVariantsElement(
 	>,
 ): ItemProperty | null {
 	const { key, ru } = translationOf(el);
-	const valueColor = el.formatted?.valueColor ?? el.valueColor;
+	const polarity = toPolarity(el.formatted?.valueColor ?? el.valueColor);
 	if (Array.isArray(el.value)) {
-		return { key: extractFactorKey(key), values: el.value, valueColor, name_ru: ru };
+		return { key: extractFactorKey(key), values: el.value, polarity, name_ru: ru };
 	}
-	return { key: extractFactorKey(key), value: el.value, valueColor, name_ru: ru };
+	return { key: extractFactorKey(key), value: el.value, polarity, name_ru: ru };
 }
 function parseBackpackSpecials(
 	el: Extract<

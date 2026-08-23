@@ -1,7 +1,7 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { DATA_DIR, FETCH_TIMEOUT_MS, githubRawUrl } from "./constants";
-import { errorMessage } from "./utils/fsUtils";
+import { errorMessage, writeJSONSync } from "./utils/fsUtils";
 const OUT_FILE = resolve(DATA_DIR, "achievements.json");
 const RAW_URL = githubRawUrl("achievements.json");
 const LOCAL_CANDIDATES = [resolve("merged", "achievements.json"), resolve("items", "achievements.json")];
@@ -58,7 +58,7 @@ export async function buildAchievements(): Promise<number> {
 	const raw = local ?? (await fetchRemote());
 	if (!local) console.log(`[Achievements] Fetched from GitHub: ${RAW_URL}`);
 	const achievements = transform(raw);
-	writeFileSync(OUT_FILE, JSON.stringify(achievements), "utf8");
+	writeJSONSync(OUT_FILE, achievements);
 	console.log(`[Achievements] Written ${achievements.length} to ${OUT_FILE}`);
 	return achievements.length;
 }

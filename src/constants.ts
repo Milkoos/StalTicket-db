@@ -19,8 +19,13 @@ export const WEAPON_DAMAGE_KEY = "core.tooltip.stat_name.damage_type.direct";
 export const ARMOR_BULLET_FACTOR_KEY = "stalker.artefact_properties.factor.bullet_dmg_factor";
 export const UPGRADE_STATS_TITLE_KEY = "stalker.tooltip.armor_artefact.info.upgrade_stats";
 export const FACTOR_PREFIXES = ["stalker.artefact_properties.factor.", "stalker.artefact.properties.factor."] as const;
-export const POSITIVE_COLOR = "53C353";
-export const NEGATIVE_COLOR = "FF4D4D";
+export type Polarity = "positive" | "negative" | "neutral";
+/** Raw source colors mapped to the polarity of the stat effect. */
+export const COLOR_POLARITY: Record<string, Polarity> = {
+	"53C353": "positive",
+	C15252: "negative",
+	EEEEEE: "neutral",
+};
 export const STANDALONE_FILES = ["listing.json", "achievements.json"] as const;
 export const ALLOWED_ITEM_CATEGORIES = new Set(["weapon", "armor", "artefact", "backpacks", "containers"]);
 export function githubZipUrl(): string {

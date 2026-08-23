@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { FACTORS_SOURCE_URL, FETCH_TIMEOUT_MS, NEGATIVE_COLOR, POSITIVE_COLOR } from "./constants";
+import { FACTORS_SOURCE_URL, FETCH_TIMEOUT_MS } from "./constants";
 import type { AddStatBlock, NumericRangeElement } from "./type";
 import { errorMessage, scanJsonFiles } from "./utils/fsUtils";
 interface ApiStat {
@@ -58,11 +58,8 @@ function toAddStatBlock(stats: ApiStat[]): AddStatBlock {
 		if (formattedValue && typeof formattedValue === "object") {
 			formatted.value = formattedValue;
 		}
-		const color = isPositive === true ? POSITIVE_COLOR : isPositive === false ? NEGATIVE_COLOR : undefined;
-		if (color) {
-			formatted.nameColor = color;
-			formatted.valueColor = color;
-		}
+		if (isPositive === true) formatted.valueColor = "positive";
+		else if (isPositive === false) formatted.valueColor = "negative";
 		if (Object.keys(formatted).length) element.formatted = formatted;
 		elements.push(element);
 	}
