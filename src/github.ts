@@ -7,6 +7,7 @@ import {
 	GITHUB_BRANCH,
 	GITHUB_REPO,
 	NOTIFY_TIMEOUT_MS,
+	STANDALONE_FILES,
 	SYNC_WEBHOOK_URL,
 	githubCommitApiUrl,
 } from "./constants";
@@ -23,7 +24,6 @@ export async function downloadZip(url: string, dest: string, proxy?: string): Pr
 	const sizeMb = (fs.statSync(dest).size / 1024 / 1024).toFixed(2);
 	console.log(`[GitHub] Download completed (${sizeMb} MB)`);
 }
-const STANDALONE = new Set<string>(["listing.json", "achievements.json"]);
 export function extractItemsFromZip(zipPath: string, targetDir: string): void {
 	const zip = new AdmZip(zipPath);
 	const rootPrefix = `${GITHUB_REPO}-${GITHUB_BRANCH}/ru/`;
@@ -32,7 +32,7 @@ export function extractItemsFromZip(zipPath: string, targetDir: string): void {
 		if (entry.isDirectory) continue;
 		const relToRoot = entry.entryName.startsWith(rootPrefix) ? entry.entryName.slice(rootPrefix.length) : "";
 		let outRel: string | undefined;
-		if (STANDALONE.has(relToRoot)) {
+		if ((STANDALONE_FILES as readonly string[]).includes(relToRoot)) {
 			outRel = relToRoot;
 		} else if (entry.entryName.startsWith(itemsPrefix)) {
 			const itemRel = entry.entryName.slice(itemsPrefix.length);

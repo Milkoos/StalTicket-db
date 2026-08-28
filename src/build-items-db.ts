@@ -198,6 +198,10 @@ function main(): void {
 	const items: ItemData[] = [];
 	collectItems(resolve(OUT_DIR, "items"), items);
 	items.sort((a, b) => a.id.localeCompare(b.id));
+	if (items.length === 0) {
+		console.error(`[BuildItems] No items collected — aborting, keeping existing ${DATA_FILE}`);
+		process.exit(1);
+	}
 	writeJSONSync(DATA_FILE, items);
 	console.log(`[BuildItems] Written ${items.length} items to ${DATA_FILE}`);
 }

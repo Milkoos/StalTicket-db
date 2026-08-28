@@ -39,7 +39,11 @@ async function syncOnce(): Promise<boolean> {
 	const remoteSha = await getRemoteSha();
 	console.log("[Main] savedSha =", savedSha, "| remoteSha =", remoteSha);
 	const needUpdate = FORCE_PULL || !savedSha || (!!remoteSha && remoteSha !== savedSha);
-	if (!needUpdate) return false;
+	if (!needUpdate) {
+		if (remoteSha === null) console.warn("[Main] GitHub API unreachable this round (rate limit / network) — will retry");
+		else console.log("[Main] No changes");
+		return false;
+	}
 	console.log("[Main] Updating from GitHub...");
 	const zipPath = resolveIn(ZIP_FILE);
 	await downloadZip(githubZipUrl(), zipPath, proxy);
@@ -56,8 +60,6 @@ async function runAndNotify(): Promise<void> {
 	if (await syncOnce()) {
 		console.log("[Main] Changes detected → syncing");
 		await notifySync();
-	} else {
-		console.log("[Main] No changes");
 	}
 }
 if (process.argv.includes("--no-loop")) {

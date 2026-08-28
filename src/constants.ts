@@ -9,7 +9,7 @@ export const GITHUB_REPO = "stalzone-database";
 export const GITHUB_BRANCH = "main";
 export const FORCE_PULL = process.env.FORCE_PULL === "1";
 export const CLEAN_ORIG = process.env.CLEAN_ORIG === "1";
-export const UPDATE_COOLDOWN_MS = 30000;
+export const UPDATE_COOLDOWN_MS = 5 * 60 * 1000;
 export const FETCH_TIMEOUT_MS = 15000;
 export const NOTIFY_TIMEOUT_MS = 5000;
 export const SYNC_WEBHOOK_URL = "http://sync:7829/sync";
@@ -20,7 +20,6 @@ export const ARMOR_BULLET_FACTOR_KEY = "stalker.artefact_properties.factor.bulle
 export const UPGRADE_STATS_TITLE_KEY = "stalker.tooltip.armor_artefact.info.upgrade_stats";
 export const FACTOR_PREFIXES = ["stalker.artefact_properties.factor.", "stalker.artefact.properties.factor."] as const;
 export type Polarity = "positive" | "negative" | "neutral";
-/** Raw source colors mapped to the polarity of the stat effect. */
 export const COLOR_POLARITY: Record<string, Polarity> = {
 	"53C353": "positive",
 	C15252: "negative",

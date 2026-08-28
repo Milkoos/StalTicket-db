@@ -99,7 +99,7 @@ export async function additionalStatsParse(outDir: string, proxy?: string): Prom
 	}
 	console.log(`[AddStats] Index keys generated: ${index.size}`);
 	let matched = 0;
-	let modified = 0;
+	const lastBlockByFile = new Map<string, AddStatBlock>();
 	for (const item of apiItems) {
 		const lookupKeys = [item.id, item.custom_id, item.key].filter((k): k is string => Boolean(k));
 		const files = [...new Set(lookupKeys.flatMap((key) => index.get(key) ?? []))];
@@ -109,27 +109,29 @@ export async function additionalStatsParse(outDir: string, proxy?: string): Prom
 		const block = toAddStatBlock(stats);
 		if (!block.elements.length) continue;
 		matched++;
-		for (const file of files) {
-			try {
-				const raw = JSON.parse(await fs.readFile(file, "utf8")) as RawItemFile;
-				const infoBlocks = raw.infoBlocks ?? raw.info_blocks ?? [];
-				raw.infoBlocks = [
-					...infoBlocks.filter(
-						(b) =>
-							(
-								b as {
-									type?: string;
-								}
-							).type !== "addStat",
-					),
-					block,
-				];
-				delete raw.info_blocks;
-				await fs.writeFile(file, JSON.stringify(raw, null, 2), "utf8");
-				modified++;
-			} catch (e) {
-				console.warn(`[AddStats] Failed to update file ${file}: ${errorMessage(e)}`);
-			}
+		for (const file of files) lastBlockByFile.set(file, block);
+	}
+	let modified = 0;
+	for (const [file, block] of lastBlockByFile) {
+		try {
+			const raw = JSON.parse(await fs.readFile(file, "utf8")) as RawItemFile;
+			const infoBlocks = raw.infoBlocks ?? raw.info_blocks ?? [];
+			raw.infoBlocks = [
+				...infoBlocks.filter(
+					(b) =>
+						(
+							b as {
+								type?: string;
+							}
+						).type !== "addStat",
+				),
+				block,
+			];
+			delete raw.info_blocks;
+			await fs.writeFile(file, JSON.stringify(raw, null, 2), "utf8");
+			modified++;
+		} catch (e) {
+			console.warn(`[AddStats] Failed to update file ${file}: ${errorMessage(e)}`);
 		}
 	}
 	console.log(`[AddStats] Done. Matched: ${matched}, Files updated: ${modified}`);
