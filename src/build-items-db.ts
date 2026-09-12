@@ -202,7 +202,25 @@ function main(): void {
 		console.error(`[BuildItems] No items collected — aborting, keeping existing ${DATA_FILE}`);
 		process.exit(1);
 	}
+	preserveLastKnownProps(items);
 	writeJSONSync(DATA_FILE, items);
 	console.log(`[BuildItems] Written ${items.length} items to ${DATA_FILE}`);
+}
+function preserveLastKnownProps(items: ItemData[]): void {
+	const previous = readJSONSync<ItemData[]>(DATA_FILE);
+	if (!Array.isArray(previous) || previous.length === 0) return;
+	const prevById = new Map(previous.map((item) => [item.id, item]));
+	let restored = 0;
+	for (const item of items) {
+		if (item.item_properties) continue;
+		const prev = prevById.get(item.id);
+		if (prev?.item_properties) {
+			item.item_properties = prev.item_properties;
+			restored++;
+		}
+	}
+	if (restored > 0) {
+		console.log(`[BuildItems] Preserved last-known item_properties for ${restored} item(s)`);
+	}
 }
 main();
