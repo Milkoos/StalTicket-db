@@ -16,15 +16,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -4.08,
-          "max": -3.468,
+          "min": -81.6,
+          "max": -69.36,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.7,
-          "max": -0.595,
+          "min": -14,
+          "max": -11.900001,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         }
@@ -84,7 +84,7 @@
       "main": [
         {
           "key": "frost_accumulation",
-          "value": 1,
+          "value": 20,
           "polarity": "negative",
           "name_ru": "Холод"
         }
@@ -415,7 +415,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -676,7 +676,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -811,8 +811,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -870,8 +870,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -929,8 +929,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         }
@@ -981,8 +981,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -1033,15 +1033,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -2116,7 +2116,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -1,
+          "value": -20,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -2540,13 +2540,13 @@
       "main": [
         {
           "key": "thermal_accumulation",
-          "value": -1.875,
+          "value": -37.5,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "value": 0.5,
+          "value": 10,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -2578,13 +2578,13 @@
       "main": [
         {
           "key": "thermal_accumulation",
-          "value": -1.875,
+          "value": -37.5,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "value": 0.5,
+          "value": 10,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -2977,8 +2977,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -3029,8 +3029,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Радиация"
         }
@@ -3081,8 +3081,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -3140,8 +3140,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
@@ -3213,8 +3213,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -3258,8 +3258,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
@@ -3310,8 +3310,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         },
@@ -3725,7 +3725,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -4084,13 +4084,13 @@
       "main": [
         {
           "key": "psycho_accumulation",
-          "value": 0.5,
+          "value": 10,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         },
         {
           "key": "frost_accumulation",
-          "value": -2.5,
+          "value": -50,
           "polarity": "positive",
           "name_ru": "Холод"
         }
@@ -4128,15 +4128,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         }
@@ -4188,7 +4188,7 @@
         },
         {
           "key": "biological_accumulation",
-          "value": -1.62,
+          "value": -32.4,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         }
@@ -4395,7 +4395,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -1,
+          "value": -20,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -5223,8 +5223,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -5282,8 +5282,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -5341,8 +5341,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -5400,8 +5400,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         },
@@ -5459,8 +5459,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -5497,8 +5497,8 @@
       "main": [
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
@@ -5570,8 +5570,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         }
@@ -5629,15 +5629,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         }
@@ -5695,8 +5695,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -5747,15 +5747,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.192,
-          "max": -0.1632,
+          "min": -3.8400002,
+          "max": -3.2640002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         }
@@ -5818,8 +5818,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
@@ -6890,8 +6890,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -6982,13 +6982,6 @@
           "value": -6,
           "polarity": "negative",
           "name_ru": "Скорость передвижения"
-        },
-        {
-          "key": "core.tooltip.stat_name.damage_type.direct",
-          "min": 188,
-          "max": 244.4,
-          "polarity": "neutral",
-          "name_ru": "Урон"
         }
       ]
     }
@@ -7693,7 +7686,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -7872,15 +7865,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.6,
-          "max": -0.51000005,
+          "min": -12,
+          "max": -10.200001,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         }
@@ -8093,8 +8086,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
@@ -8159,15 +8152,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "psycho_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -8225,8 +8218,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
@@ -8860,8 +8853,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -4.08,
-          "max": -3.468,
+          "min": -81.6,
+          "max": -69.36,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -8913,7 +8906,7 @@
       "main": [
         {
           "key": "thermal_accumulation",
-          "value": -1.62,
+          "value": -32.4,
           "polarity": "positive",
           "name_ru": "Температура"
         }
@@ -10015,15 +10008,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "biological_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
@@ -10088,8 +10081,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Температура"
         },
@@ -10154,15 +10147,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "psycho_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         },
@@ -10227,8 +10220,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -10286,8 +10279,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
@@ -10352,15 +10345,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.192,
-          "max": -0.1632,
+          "min": -3.8400002,
+          "max": -3.2640002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         },
@@ -10432,8 +10425,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -10484,22 +10477,22 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "biological_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.7,
-          "max": -0.595,
+          "min": -14,
+          "max": -11.900001,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -10571,8 +10564,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -10623,8 +10616,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -10682,8 +10675,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         },
@@ -10722,13 +10715,13 @@
       "main": [
         {
           "key": "thermal_accumulation",
-          "value": -2.5,
+          "value": -50,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "value": 0.5,
+          "value": 10,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -10771,8 +10764,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -10987,7 +10980,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.25,
+          "value": -5,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -11272,8 +11265,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
@@ -11359,15 +11352,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         }
@@ -11425,8 +11418,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -11498,8 +11491,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -11607,22 +11600,22 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
@@ -11680,8 +11673,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -12124,7 +12117,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -12488,8 +12481,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         },
@@ -12561,8 +12554,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -12613,15 +12606,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.3,
-          "max": -0.25500003,
+          "min": -6,
+          "max": -5.1000004,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         }
@@ -12679,15 +12672,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.384,
-          "max": -0.3264,
+          "min": -7.6800003,
+          "max": -6.5280004,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.85,
-          "max": 1,
+          "min": 17,
+          "max": 20,
           "polarity": "negative",
           "name_ru": "Холод"
         },
@@ -12752,8 +12745,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -12818,8 +12811,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -12942,8 +12935,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -12987,22 +12980,22 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.384,
-          "max": -0.3264,
+          "min": -7.6800003,
+          "max": -6.5280004,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.85,
-          "max": 1,
+          "min": 17,
+          "max": 20,
           "polarity": "negative",
           "name_ru": "Холод"
         },
         {
           "key": "combustion_accumulation",
-          "min": -0.4,
-          "max": -0.34,
+          "min": -8,
+          "max": -6.8,
           "polarity": "positive",
           "name_ru": "Горение"
         }
@@ -13088,8 +13081,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -13140,22 +13133,22 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
         {
           "key": "combustion_accumulation",
-          "min": -0.3,
-          "max": -0.25500003,
+          "min": -6,
+          "max": -5.1000004,
           "polarity": "positive",
           "name_ru": "Горение"
         },
@@ -13305,7 +13298,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -13667,7 +13660,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.25,
+          "value": -5,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -13943,7 +13936,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -14685,7 +14678,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -15107,7 +15100,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -15622,7 +15615,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.25,
+          "value": -5,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -16079,8 +16072,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -16120,7 +16113,7 @@
       "main": [
         {
           "key": "radiation_accumulation",
-          "value": -1.62,
+          "value": -32.4,
           "polarity": "positive",
           "name_ru": "Радиация"
         }
@@ -16158,8 +16151,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -16841,15 +16834,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "psycho_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
@@ -16907,22 +16900,22 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -1.1,
-          "max": -0.93500006,
+          "min": -22,
+          "max": -18.7,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -16980,15 +16973,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.192,
-          "max": -0.1632,
+          "min": -3.8400002,
+          "max": -3.2640002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         },
@@ -17081,8 +17074,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         },
@@ -17140,8 +17133,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -4.08,
-          "max": -3.468,
+          "min": -81.6,
+          "max": -69.36,
           "polarity": "positive",
           "name_ru": "Радиация"
         }
@@ -17192,8 +17185,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Температура"
         },
@@ -17270,15 +17263,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.384,
-          "max": -0.3264,
+          "min": -7.6800003,
+          "max": -6.5280004,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.85,
-          "max": 1,
+          "min": 17,
+          "max": 20,
           "polarity": "negative",
           "name_ru": "Холод"
         }
@@ -17336,15 +17329,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -17402,15 +17395,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -4.08,
-          "max": -3.468,
+          "min": -81.6,
+          "max": -69.36,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "combustion_accumulation",
-          "min": -0.2,
-          "max": -0.17,
+          "min": -4,
+          "max": -3.4,
           "polarity": "positive",
           "name_ru": "Горение"
         }
@@ -17629,7 +17622,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -1,
+          "value": -20,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -17718,7 +17711,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -18099,7 +18092,7 @@
         },
         {
           "key": "frost_accumulation",
-          "value": 1,
+          "value": 20,
           "polarity": "negative",
           "name_ru": "Холод"
         }
@@ -18229,7 +18222,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -18342,7 +18335,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -1,
+          "value": -20,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -18689,8 +18682,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -18748,8 +18741,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -18819,8 +18812,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
@@ -18878,29 +18871,29 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -18951,8 +18944,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
@@ -19017,8 +19010,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -19069,15 +19062,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.4,
-          "max": -0.34,
+          "min": -8,
+          "max": -6.8,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         }
@@ -19135,15 +19128,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "psycho_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -19194,8 +19187,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         },
@@ -19253,15 +19246,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         },
@@ -19319,22 +19312,22 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         }
@@ -19549,7 +19542,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -1,
+          "value": -20,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -20725,7 +20718,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -21303,8 +21296,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Температура"
         },
@@ -21362,15 +21355,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -21428,15 +21421,15 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.192,
-          "max": -0.1632,
+          "min": -3.8400002,
+          "max": -3.2640002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         },
@@ -21494,8 +21487,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Температура"
         }
@@ -21546,15 +21539,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Температура"
         },
@@ -21612,8 +21605,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -21664,15 +21657,15 @@
         },
         {
           "key": "biological_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.8,
-          "max": -0.68,
+          "min": -16,
+          "max": -13.6,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         }
@@ -21730,8 +21723,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Пси-излучение"
         }
@@ -21803,8 +21796,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 2.125,
-          "max": 2.5,
+          "min": 42.5,
+          "max": 50,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -21855,22 +21848,22 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -0.3,
-          "max": -0.25500003,
+          "min": -6,
+          "max": -5.1000004,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         }
@@ -21978,7 +21971,7 @@
         },
         {
           "key": "biological_accumulation",
-          "value": -1.62,
+          "value": -32.4,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         }
@@ -22009,15 +22002,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Температура"
         }
@@ -22095,8 +22088,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
@@ -22161,8 +22154,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -3.04,
-          "max": -2.584,
+          "min": -60.8,
+          "max": -51.68,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
@@ -22220,15 +22213,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 0.53125,
-          "max": 0.625,
+          "min": 10.625,
+          "max": 12.5,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -22293,15 +22286,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Температура"
         }
@@ -22359,8 +22352,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Биологическое заражение"
         },
@@ -22425,8 +22418,8 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": 1.0625,
-          "max": 1.25,
+          "min": 21.25,
+          "max": 25,
           "polarity": "negative",
           "name_ru": "Радиация"
         }
@@ -22470,36 +22463,36 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.192,
-          "max": -0.1632,
+          "min": -3.8400002,
+          "max": -3.2640002,
           "polarity": "positive",
           "name_ru": "Температура"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.599998,
+          "max": -21.760002,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         },
         {
           "key": "frost_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Холод"
         },
         {
           "key": "combustion_accumulation",
-          "min": -0.2,
-          "max": -0.17,
+          "min": -4,
+          "max": -3.4,
           "polarity": "positive",
           "name_ru": "Горение"
         },
@@ -22585,15 +22578,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "psycho_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Пси-излучение"
         }
@@ -22644,15 +22637,15 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Радиация"
         },
         {
           "key": "biological_accumulation",
-          "min": 0.425,
-          "max": 0.5,
+          "min": 8.5,
+          "max": 10,
           "polarity": "negative",
           "name_ru": "Биологическое заражение"
         },
@@ -22717,8 +22710,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -2.16,
-          "max": -1.8360001,
+          "min": -43.2,
+          "max": -36.72,
           "polarity": "positive",
           "name_ru": "Температура"
         }
@@ -23175,7 +23168,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
@@ -23341,7 +23334,7 @@
         },
         {
           "key": "bleeding_accumulation",
-          "value": -0.5,
+          "value": -10,
           "polarity": "positive",
           "name_ru": "Кровотечение"
         },
