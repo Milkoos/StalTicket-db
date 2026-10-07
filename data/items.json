@@ -44,8 +44,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.3,
-          "max": -0.25,
+          "min": -6,
+          "max": -5,
           "name_ru": "Кровотечение"
         }
       ]
@@ -938,8 +938,8 @@
       "additional": [
         {
           "key": "radiation_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Радиация"
         },
         {
@@ -1002,8 +1002,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.8,
-          "max": -0.68,
+          "min": -16,
+          "max": -13.6,
           "name_ru": "Кровотечение"
         }
       ]
@@ -3102,8 +3102,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.9,
-          "max": -0.765,
+          "min": -18,
+          "max": -15.3,
           "name_ru": "Кровотечение"
         }
       ]
@@ -5232,8 +5232,8 @@
       "additional": [
         {
           "key": "bleeding_accumulation",
-          "min": -0.8,
-          "max": -0.68,
+          "min": -16,
+          "max": -13.6,
           "name_ru": "Кровотечение"
         },
         {
@@ -5840,8 +5840,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -1,
-          "max": -0.82,
+          "min": -20,
+          "max": -16.4,
           "name_ru": "Кровотечение"
         },
         {
@@ -7881,8 +7881,8 @@
       "additional": [
         {
           "key": "bleeding_accumulation",
-          "min": -0.2,
-          "max": -0.17,
+          "min": -4,
+          "max": -3.4,
           "name_ru": "Кровотечение"
         },
         {
@@ -7982,32 +7982,32 @@
         },
         {
           "key": "radiation_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.6,
+          "max": -21.76,
           "name_ru": "Радиация"
         },
         {
           "key": "thermal_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.6,
+          "max": -21.76,
           "name_ru": "Температура"
         },
         {
           "key": "biological_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.6,
+          "max": -21.76,
           "name_ru": "Биологическое заражение"
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.6,
+          "max": -21.76,
           "name_ru": "Пси-излучение"
         },
         {
           "key": "bleeding_accumulation",
-          "min": -1,
-          "max": -0.85,
+          "min": -20,
+          "max": -17,
           "name_ru": "Кровотечение"
         },
         {
@@ -10037,8 +10037,8 @@
         },
         {
           "key": "biological_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Биологическое заражение"
         },
         {
@@ -10182,8 +10182,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -1,
-          "max": -0.85,
+          "min": -20,
+          "max": -17,
           "name_ru": "Кровотечение"
         }
       ]
@@ -10513,8 +10513,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.3,
-          "max": -0.24,
+          "min": -6,
+          "max": -4.8,
           "name_ru": "Кровотечение"
         },
         {
@@ -10686,6 +10686,26 @@
           "max": 1.4,
           "polarity": "positive",
           "name_ru": "Реакция на электричество"
+        }
+      ],
+      "additional": [
+        {
+          "key": "speed_modifier",
+          "min": 0.29,
+          "max": 0.35,
+          "name_ru": "Скорость передвижения"
+        },
+        {
+          "key": "regeneration_bonus",
+          "min": 0.425,
+          "max": 0.5,
+          "name_ru": "Регенерация здоровья"
+        },
+        {
+          "key": "electra_dmg_factor",
+          "min": 10.05,
+          "max": 12.2,
+          "name_ru": "Электрозащита"
         }
       ]
     }
@@ -11642,8 +11662,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.06,
+          "min": -25.6,
+          "max": -21.2,
           "name_ru": "Пси-излучение"
         }
       ]
@@ -12754,8 +12774,8 @@
       "additional": [
         {
           "key": "bleeding_accumulation",
-          "min": -1,
-          "max": -0.85,
+          "min": -20,
+          "max": -17,
           "name_ru": "Кровотечение"
         },
         {
@@ -13175,8 +13195,8 @@
         },
         {
           "key": "thermal_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Температура"
         }
       ]
@@ -16869,8 +16889,8 @@
         },
         {
           "key": "psycho_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Пси-излучение"
         }
       ]
@@ -16930,8 +16950,8 @@
       "additional": [
         {
           "key": "radiation_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Радиация"
         },
         {
@@ -16942,8 +16962,8 @@
         },
         {
           "key": "bleeding_accumulation",
-          "min": -0.4,
-          "max": -0.32,
+          "min": -8,
+          "max": -6.4,
           "name_ru": "Кровотечение"
         }
       ]
@@ -18901,8 +18921,8 @@
       "additional": [
         {
           "key": "bleeding_accumulation",
-          "min": -0.698,
-          "max": -0.575,
+          "min": -13.96,
+          "max": -11.5,
           "name_ru": "Кровотечение"
         },
         {
@@ -18960,8 +18980,8 @@
       "additional": [
         {
           "key": "psycho_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Пси-излучение"
         },
         {
@@ -19143,16 +19163,16 @@
       ],
       "additional": [
         {
-          "key": "regeneration_bonus",
-          "min": 0.68,
-          "max": 0.8,
-          "name_ru": "Регенерация здоровья"
+          "key": "health_bonus",
+          "min": 0.34,
+          "max": 0.4,
+          "name_ru": "Живучесть"
         },
         {
-          "key": "health_bonus",
-          "min": 0.85,
-          "max": 1,
-          "name_ru": "Живучесть"
+          "key": "regeneration_bonus",
+          "min": 0.51,
+          "max": 0.6,
+          "name_ru": "Регенерация здоровья"
         },
         {
           "key": "stamina_regeneration_bonus",
@@ -19335,8 +19355,8 @@
       "additional": [
         {
           "key": "psycho_accumulation",
-          "min": -1.28,
-          "max": -1.088,
+          "min": -25.6,
+          "max": -21.76,
           "name_ru": "Пси-излучение"
         },
         {
@@ -21673,8 +21693,8 @@
       "additional": [
         {
           "key": "bleeding_accumulation",
-          "min": -0.3,
-          "max": -0.255,
+          "min": -6,
+          "max": -5.1,
           "name_ru": "Кровотечение"
         },
         {
@@ -22368,8 +22388,8 @@
       "additional": [
         {
           "key": "biological_accumulation",
-          "min": -0.88,
-          "max": -0.748,
+          "min": -17.6,
+          "max": -14.96,
           "name_ru": "Биологическое заражение"
         },
         {
@@ -22719,8 +22739,8 @@
       "additional": [
         {
           "key": "thermal_accumulation",
-          "min": -0.88,
-          "max": -0.35,
+          "min": -17.6,
+          "max": -7,
           "name_ru": "Температура"
         },
         {
