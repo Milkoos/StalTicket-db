@@ -236,8 +236,14 @@
     "item_properties": {
       "main": [
         {
+          "key": "speed_modifier",
+          "value": 1,
+          "polarity": "positive",
+          "name_ru": "Скорость передвижения"
+        },
+        {
           "key": "max_weight_bonus",
-          "value": 5,
+          "value": 7,
           "polarity": "positive",
           "name_ru": "Переносимый вес"
         },
@@ -297,7 +303,7 @@
         },
         {
           "key": "bleeding_protection",
-          "value": 35,
+          "value": 25,
           "polarity": "neutral",
           "name_ru": "Защита от кровотечения"
         }
@@ -16444,8 +16450,14 @@
     "item_properties": {
       "main": [
         {
+          "key": "speed_modifier",
+          "value": 1,
+          "polarity": "positive",
+          "name_ru": "Скорость передвижения"
+        },
+        {
           "key": "max_weight_bonus",
-          "value": 5,
+          "value": 7,
           "polarity": "positive",
           "name_ru": "Переносимый вес"
         },
@@ -16505,7 +16517,7 @@
         },
         {
           "key": "bleeding_protection",
-          "value": 35,
+          "value": 25,
           "polarity": "neutral",
           "name_ru": "Защита от кровотечения"
         }
